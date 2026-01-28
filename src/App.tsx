@@ -51,10 +51,10 @@ function App() {
     // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
-  const createTask = (title: TaskType["title"]) => {
+  const createTask = (title: TaskType["title"], todolistId: TodolistType['id']) => {
     // 1. Создаём новую структуру данных
-    // const newTask: TaskType = { id: v1(), title, isDone: false }
-    const nextState: TaskType[] = [...tasks, { id: v1(), title, isDone: false }]
+    const newTask: TaskType = { id: v1(), title, isDone: false }
+    const nextState = {...tasks, [todolistId]: [...tasks[todolistId], newTask]}
     // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
