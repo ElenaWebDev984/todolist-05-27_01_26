@@ -45,23 +45,23 @@ function App() {
 
 
   // CRUD
-  const deleteTask = (taskId: TaskType["id"]) => {
-    // 1. Создаём новую сткутуру данных 
-    const nextState = tasks.filter(t => t.id !== taskId)
-    // 2. Передаём новую сткутуру данных для обновления представления (визуализации) данных
+  const deleteTask = (taskId: TaskType["id"], todolistId: TodolistType['id']) => {
+    // 1. Создаём новую структуру данных
+    const nextState = {...tasks, [todolistId] : tasks[todolistId].filter(t => t.id !== taskId) }
+    // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
   const createTask = (title: TaskType["title"]) => {
-    // 1. Создаём новую сткутуру данных 
+    // 1. Создаём новую структуру данных
     // const newTask: TaskType = { id: v1(), title, isDone: false }
     const nextState: TaskType[] = [...tasks, { id: v1(), title, isDone: false }]
-    // 2. Передаём новую сткутуру данных для обновления представления (визуализации) данных
+    // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
-  const changeTaskStatus = (taskId: TaskType["id"], isDone: TaskType["isDone"]) => {
-    // 1. Создаём новую сткутуру данных 
+  const changeTaskStatus = (taskId: TaskType["id"], isDone: TaskType["isDone"], todolistId: TodolistType['id']) => {
+    // 1. Создаём новую структуру данных
     const nextState: TaskType[] = tasks.map(t => t.id === taskId ? {...t, isDone}   : t)
-    // 2. Передаём новую сткутуру данных для обновления представления (визуализации) данных
+    // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
   const changeTaskTitle = () => {}
