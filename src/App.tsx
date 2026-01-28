@@ -6,19 +6,43 @@ import { v1 } from 'uuid';
 
 export type FilterValuesType = "all" | "active" | "completed"
 
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterValuesType
+}
+
+type TasksStateType = {
+    [todolistId: string]: TaskType[]
+}
+
 
 
 function App() {
-  console.log(v1());
 
   // BLL
-  const todoListTitle = "What to learn"
+    const todolistId_1 = v1()
+    const todolistId_2 = v1()
 
-  const [tasks, setTasks] = useState<TaskType[]>([
-    { id: v1(), title: "HTML & CSS", isDone: true },
-    { id: v1(), title: "JS & TS", isDone: true },
-    { id: v1(), title: "REACT", isDone: false },
-  ])
+    const [todolists, setTodolists] = useState<TodolistType[]>([
+            {id: todolistId_1, title: 'What to learn', filter: 'all'},
+            {id: todolistId_2, title: 'What to buy', filter: 'all'},
+    ])
+
+    const [tasks, setTasks] = useState<TasksStateType>({
+        [todolistId_1]: [
+            { id: v1(), title: "HTML & CSS", isDone: true },
+            { id: v1(), title: "JS & TS", isDone: true },
+            { id: v1(), title: "REACT", isDone: false },
+        ],
+        [todolistId_2]: [
+            { id: v1(), title: "Milk", isDone: true },
+            { id: v1(), title: "Fruit", isDone: true },
+            { id: v1(), title: "Bread", isDone: false },
+        ],
+    })
+
+
 
   // CRUD
   const deleteTask = (taskId: TaskType["id"]) => {
