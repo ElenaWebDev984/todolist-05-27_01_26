@@ -51,6 +51,7 @@ function App() {
     // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
+
   const createTask = (title: TaskType["title"], todolistId: TodolistType['id']) => {
     // 1. Создаём новую структуру данных
     const newTask: TaskType = { id: v1(), title, isDone: false }
@@ -58,13 +59,17 @@ function App() {
     // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
+
   const changeTaskStatus = (taskId: TaskType["id"], isDone: TaskType["isDone"], todolistId: TodolistType['id']) => {
     // 1. Создаём новую структуру данных
-    const nextState: TaskType[] = tasks.map(t => t.id === taskId ? {...t, isDone}   : t)
+    const nextState = {...tasks, [todolistId]: tasks[todolistId].map(t => t.id === taskId) ? {...t, isDone} : t}
     // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
     setTasks(nextState)
   }
+
   const changeTaskTitle = () => {}
+
+  //   CRUD todolists
 
   // UI
 
