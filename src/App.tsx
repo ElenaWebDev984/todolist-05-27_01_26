@@ -44,7 +44,8 @@ function App() {
 
 
 
-  // CRUD
+  // CRUD tasks
+
   const deleteTask = (taskId: TaskType["id"], todolistId: TodolistType['id']) => {
     // 1. Создаём новую структуру данных
     const nextState = {...tasks, [todolistId] : tasks[todolistId].filter(t => t.id !== taskId) }
@@ -70,6 +71,20 @@ function App() {
   const changeTaskTitle = () => {}
 
   //   CRUD todolists
+
+    const changeTodolistFilter = (filter: FilterValuesType, todolistId: TodolistType['id']) => {
+        // 1. Создаём новую структуру данных
+        const nextState = todolists.map(tl => tl.id === todolistId ? {...tl, filter}  : tl)
+        // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
+        setTodolists(nextState)
+    }
+
+    const deleteTodolist = (todolistId: TodolistType['id']) => {
+        // 1. Создаём новую структуру данных
+        const nextState = todolists.filter(tl => tl.id !== todolistId)
+        // 2. Передаём новую структуру данных для обновления представления (визуализации) данных
+        setTodolists(nextState)
+    }
 
   // UI
 
